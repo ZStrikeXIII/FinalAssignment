@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,7 +33,6 @@ public class Main {
     for (int i = 1; i < messageWords.size(); i++) {
       biGrams.merge(new HashSet<>(Arrays.asList(messageWords.get(i - 1), messageWords.get(i))), 1,
           Integer::sum);
-      //This is a version of MapReduce where we combine shuffle and reduce in the same step
     }
     //biGrams.forEach((key, value) -> System.out.println(key + ", " + value)); //Printing test
 
@@ -51,6 +51,32 @@ public class Main {
           listOfFeatures.get(0),
           listOfFeatures.get(1), support); //This will be used to test if the loop works correctly.
     }*/
+    System.out.println("Please type a word");
+    Scanner scan = new Scanner(System.in);
+    String userWord = scan.nextLine();
+    double support = 0.0; //Placeholder until actual support calculation works.
+    //System.out.println(userWord); //Testing to see if input is correct.
+    String[] wordList = new String[3]; //Array to hold the three words
+    while (wordList[2].isEmpty()) {
+      int increm = 0;
+      for (int i = 0; i < 3; i++) {
+        while (biGrams.size() > increm) {
+          //String word = biGrams.getKey();
+          String word = "placeholder";
+          if (support > 0.65) {
+            wordList[i] = word;
+          } else {
+            wordList[i] = "the";
+            wordList[i+1] = "this";
+            wordList[i+2] = "of";
+          }
+        }
+        increm++;
+      }
+    }
+    for(int i = 0; i < 3; i ++){
+      System.out.println("Your next word might be " + wordList[i] + ".\n");
+    }
   }
 }
 
